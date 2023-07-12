@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XO-Game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(45deg , #f2f2 , purple);
+        }
+        .box{
+            width: 500px;
+            height: 500px;
+            margin: 120px auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box>div{
+            width: 33.3333%;
+            height: 33.3333%;
+            border: 2px solid #123;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 65px;
+            color: rgba(0, 0, 0, 0);
+            cursor: pointer;
+            user-select: none;
+            transition: .6s linear;
+        }
+        .box>div:nth-child(even){
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div data-status="off">1</div>
+        <div data-status="off">2</div>
+        <div data-status="off">3</div>
+        <div data-status="off">4</div>
+        <div data-status="off">5</div>
+        <div data-status="off">6</div>
+        <div data-status="off">7</div>
+        <div data-status="off">8</div>
+        <div data-status="off">9</div>
+    </div>
+</body>
+<script>
+    let _div = document.querySelectorAll('.box>div')
+    let num = 3
+    let array = []
+    _div.forEach((item) =>{
+        item.addEventListener('click', ()=>{
+            if( item.getAttribute('data-status') == 'off'){
+                if( num %2 ){
+                    item.textContent = 'X'
+                }else{
+                    item.textContent = 'O'
+                }
+                item.style.color = '#000'
+                num++
+                item.setAttribute('data-status', 'on')
+                for(i = 0; i < _div.length; i++){
+                    array[i] = _div[i].innerHTML
+                }
+
+                if( ((array[0] == array[1]) && (array[0] == array[2])) ){
+                    _div[0].style.background = '#00bb00'
+                    _div[1].style.background = '#00bb00'
+                    _div[2].style.background = '#00bb00'
+                    _div[3].style.background = 'crimson'
+                    _div[4].style.background = 'crimson'
+                    _div[5].style.background = 'crimson'
+                    _div[6].style.background = 'crimson'
+                    _div[7].style.background = 'crimson'
+                    _div[8].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+
+                if( ((array[3] == array[4]) && (array[3] == array[5])) ){
+                    _div[3].style.background = '#00bb00'
+                    _div[4].style.background = '#00bb00'
+                    _div[5].style.background = '#00bb00'
+                    _div[0].style.background = 'crimson'
+                    _div[1].style.background = 'crimson'
+                    _div[2].style.background = 'crimson'
+                    _div[6].style.background = 'crimson'
+                    _div[7].style.background = 'crimson'
+                    _div[8].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+
+                if( ((array[6] == array[7]) && (array[6] == array[8])) ){
+                    _div[6].style.background = '#00bb00'
+                    _div[7].style.background = '#00bb00'
+                    _div[8].style.background = '#00bb00'
+                    _div[3].style.background = 'crimson'
+                    _div[4].style.background = 'crimson'
+                    _div[5].style.background = 'crimson'
+                    _div[0].style.background = 'crimson'
+                    _div[1].style.background = 'crimson'
+                    _div[2].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+
+                if( ((array[0] == array[3]) && (array[0] == array[6])) ){
+                    _div[0].style.background = '#00bb00'
+                    _div[3].style.background = '#00bb00'
+                    _div[6].style.background = '#00bb00'
+                    _div[1].style.background = 'crimson'
+                    _div[2].style.background = 'crimson'
+                    _div[4].style.background = 'crimson'
+                    _div[5].style.background = 'crimson'
+                    _div[7].style.background = 'crimson'
+                    _div[8].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+
+                if( ((array[1] == array[4]) && (array[1] == array[7])) ){
+                    _div[1].style.background = '#00bb00'
+                    _div[4].style.background = '#00bb00'
+                    _div[7].style.background = '#00bb00'
+                    _div[0].style.background = 'crimson'
+                    _div[2].style.background = 'crimson'
+                    _div[3].style.background = 'crimson'
+                    _div[5].style.background = 'crimson'
+                    _div[6].style.background = 'crimson'
+                    _div[8].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+
+                if( ((array[2] == array[5]) && (array[2] == array[8])) ){
+                    _div[2].style.background = '#00bb00'
+                    _div[5].style.background = '#00bb00'
+                    _div[8].style.background = '#00bb00'
+                    _div[0].style.background = 'crimson'
+                    _div[1].style.background = 'crimson'
+                    _div[3].style.background = 'crimson'
+                    _div[4].style.background = 'crimson'
+                    _div[6].style.background = 'crimson'
+                    _div[7].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+
+                if( ((array[0] == array[4]) && (array[0] == array[8])) ){
+                    _div[0].style.background = '#00bb00'
+                    _div[4].style.background = '#00bb00'
+                    _div[8].style.background = '#00bb00'
+                    _div[1].style.background = 'crimson'
+                    _div[2].style.background = 'crimson'
+                    _div[3].style.background = 'crimson'
+                    _div[5].style.background = 'crimson'
+                    _div[6].style.background = 'crimson'
+                    _div[7].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+
+                if( ((array[2] == array[4]) && (array[2] == array[6])) ){
+                    _div[2].style.background = '#00bb00'
+                    _div[4].style.background = '#00bb00'
+                    _div[6].style.background = '#00bb00'
+                    _div[0].style.background = 'crimson'
+                    _div[1].style.background = 'crimson'
+                    _div[3].style.background = 'crimson'
+                    _div[5].style.background = 'crimson'
+                    _div[7].style.background = 'crimson'
+                    _div[8].style.background = 'crimson'
+                    _finish()
+                    return false;
+                }
+            }
+        })
+    })
+
+    function _finish(){
+        for(i = 0; i < _div.length; i++){
+            _div[i].setAttribute('data-status', 'on')
+        }
+    }
+</script>
+</html>
